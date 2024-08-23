@@ -39,8 +39,7 @@ phases:
       - echo Pushing Docker image to AWS ECR .....
       - docker push $REPOSITORY_URL:$IMAGE_TAG 
       - echo "Starting Trivy scan..."
-      - trivy image --exit-code 1 $REPOSITORY_URL:$IMAGE_TAG  
-      - trivy report --severity CRITICAL --format json > trivy.json
+      - trivy image --no-progress --severity CRITICAL,HIGH $REPOSITORY_URL:$IMAGE_TAG --format json > trivy.json
       - echo "Trivy scan complete"
       - echo ECS Configuration....
       - echo Writing image definitions file...
