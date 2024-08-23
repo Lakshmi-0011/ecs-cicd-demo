@@ -10,8 +10,11 @@ phases:
       - unzip sonarscanner.zip -d /opt
       - export PATH=$PATH:/opt/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin
       - sonar-scanner --version 
-      - export TRIVY_VERSION=0.18.3
-      - curl -L https://github.com/aquasecurity/trivy/releases/download/$TRIVY_VERSION/trivy_$TRIVY_VERSION_Linux-64bit.tar.gz | tar xz
+      # - export TRIVY_VERSION=0.18.3
+      - wget https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_0.20.0_Linux-64bit.tar.gz
+      - tar zxvf trivy_0.20.0_Linux-64bit.tar.gz
+      - sudo mv trivy /usr/local/bin/
+      - trivy --version
   pre_build:
     commands:
       - echo Preparing to run SonarScanner...
@@ -30,15 +33,15 @@ phases:
       - npm install prom-client
       - docker build -t $REPOSITORY_URL:latest .
       - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG  
-      - echo "Starting Trivy scan..."
-      - trivy image --exit-code 1 $REPOSITORY_URL:$IMAGE_TAG  
-      - trivy report --severity CRITICAL --format json > trivy.json
-      - echo "Trivy scan complete"
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing Docker image to AWS ECR .....
       - docker push $REPOSITORY_URL:$IMAGE_TAG 
+      - echo "Starting Trivy scan..."
+      - trivy image --exit-code 1 $REPOSITORY_URL:$IMAGE_TAG  
+      - trivy report --severity CRITICAL --format json > trivy.json
+      - echo "Trivy scan complete"
       - echo ECS Configuration....
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URL:$IMAGE_TAG > imagedefinitions.json
