@@ -7,15 +7,17 @@ phases:
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.1.0.4477-linux-x64.zip
       - unzip sonar-scanner-cli-6.1.0.4477-linux-x64.zip
       - export PATH=$PATH:./sonar-scanner-6.1.0.4477-linux/bin/
+      - echo $PATH
+      - sonar-scanner --version
   pre_build:
     commands:
+      - echo Start sonar scanning
+      - sonar-scanner -Dsonar.projectKey=codepipeline-project-key -Dsonar.sources=. -Dsonar.host.url=$sonar_url -Dsonar.token=$sonar_token
       - echo Logging in to Amazon ECR.......
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URL
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_NUMBER)
   build:
     commands:
-      - echo Start sonar scanning
-      - sonar-scanner -Dsonar.projectKey=codepipeline-project-key -Dsonar.sources=. -Dsonar.host.url=$sonar_url -Dsonar.token=$sonar_token
       - echo Build started on `date`
       - echo Docker image is building... 
       - npm --version
