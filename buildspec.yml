@@ -15,11 +15,7 @@ phases:
   build:
     commands:
       - echo Start sonar scanning
-      - sonar-scanner \
-          -Dsonar.projectKey=codepipeline-project-key \
-          -Dsonar.sources=. \
-          -Dsonar.host.url=$sonar_url \
-          -Dsonar.token=$sonar_token
+      - sonar-scanner -Dsonar.projectKey=codepipeline-project-key -Dsonar.sources=. -Dsonar.host.url=$sonar_url -Dsonar.token=$sonar_token
       - echo Build started on `date`
       - echo Docker image is building... 
       - npm --version
