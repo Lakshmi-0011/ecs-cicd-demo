@@ -1,52 +1,20 @@
 version: 0.2
-run-as: root
 
 phases:
   install:
     commands:
-      - echo Installing SonarScanner...
-      - export SONAR_SCANNER_VERSION=5.0.1.3006
-      - curl -o sonarscanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip
-      - unzip sonarscanner.zip -d /opt
-      - export PATH=$PATH:/opt/sonar-scanner-$SONAR_SCANNER_VERSION-linux/bin
-      - sonar-scanner --version 
-      # - export TRIVY_VERSION=0.18.3
-      - wget https://github.com/aquasecurity/trivy/releases/download/v0.20.0/trivy_0.20.0_Linux-64bit.tar.gz
-      - tar zxvf trivy_0.20.0_Linux-64bit.tar.gz
-      - sudo mv trivy /usr/local/bin/
-      - trivy --version
-  pre_build:
-    commands:
-      - echo Preparing to run SonarScanner...
-      - export SONAR_SCANNER_HOME=/opt/sonar-scanner-$SONAR_SCANNER_VERSION-linux
-      - echo Start sonar scanning
-      - sonar-scanner -Dsonar.projectKey=codepipeline-project-key -Dsonar.sources=. -Dsonar.host.url=$sonar_url -Dsonar.token=$sonar_token
-      - echo Logging in to Amazon ECR.......
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URL
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_NUMBER)
+      - echo Installing app dependencies...
+      - wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2.14.0_Linux.tar.gz
+      - tar -xvf ZAP_2.14.0_Linux.tar.gz
   build:
     commands:
-      - echo Build started on `date`
-      - echo Docker image is building... 
-      - npm --version
-      - npm install express
-      - npm install prom-client
-      - docker build -t $REPOSITORY_URL:latest .
-      - docker tag $REPOSITORY_URL:latest $REPOSITORY_URL:$IMAGE_TAG  
+      - LOAD_BALANCER_DNS=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query "services[0].loadBalancers[0].DNSName" --output text)
+      - echo Load Balancer DNS: $LOAD_BALANCER_DNS
+      - ./ZAP_2.14.0/zap.sh -cmd -quickurl "http://$LOAD_BALANCER_DNS" -quickprogress -quickout ../zap_report.html
+
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing Docker image to AWS ECR .....
-      - docker push $REPOSITORY_URL:$IMAGE_TAG 
-      - echo "Starting Trivy scan..."
-      - trivy image --no-progress --severity CRITICAL,HIGH $REPOSITORY_URL:$IMAGE_TAG > trivy.json
-      - echo "Trivy scan complete"
-      - aws ecs update-service --cluster demo --service ecs-demo-service --force-new-deployment
-      # - echo ECS Configuration....
-      # - echo Writing image definitions file...
-      # - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URL:$IMAGE_TAG > imagedefinitions.json
-      # - cat imagedefinitions.json   
 artifacts:
     files: 
-      # - imagedefinitions.json
-      - trivy.json
+      - zap_report.html
