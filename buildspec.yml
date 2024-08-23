@@ -4,9 +4,9 @@ run-as: root
 phases:
   install:
     commands:
-      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
-      - unzip sonar-scanner-cli-3.3.0.1492-linux.zip
-      - export PATH=$PATH:./sonar-scanner-3.3.0.1492-linux/bin/
+      - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.1.0.4477-linux-x64.zip
+      - unzip sonar-scanner-cli-6.1.0.4477-linux-x64.zip
+      - export PATH=$PATH:./sonar-scanner-6.1.0.4477-linux/bin/
   pre_build:
     commands:
       - echo Logging in to Amazon ECR.......
