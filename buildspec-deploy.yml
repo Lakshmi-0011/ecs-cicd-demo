@@ -18,7 +18,7 @@ phases:
       - LOAD_BALANCER_ARN="$(aws elbv2 describe-target-groups --target-group-arns $TARGET_GROUP_ARN --query 'TargetGroups[0].LoadBalancerArns[0]' --output text)"
       # Describe Load Balancer to get DNS Name
       - LOAD_BALANCER_DNS="$(aws elbv2 describe-load-balancers --load-balancer-arns $LOAD_BALANCER_ARN --query 'LoadBalancers[0].DNSName' --output text)"
-      - echo "Load Balancer DNS Name: $LOAD_BALANCER_DNS"
+      - echo "Load Balancer DNS Name = $LOAD_BALANCER_DNS"
       # - echo "Load Balancer DNS: $LOAD_BALANCER_DNS"
       - ./ZAP_2.14.0/zap.sh -cmd -quickurl "http://$LOAD_BALANCER_DNS" -quickprogress -quickout ../zap_report.html
 
