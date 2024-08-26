@@ -51,11 +51,11 @@ artifacts:
     - 'image*.json'
     - 'appspec.yml'
     - 'taskdef.json'
-  secondary-artifacts:
-    DefinitionArtifact:
-      files:
-        - appspec.yaml
-        - taskdef.json
-    ImageArtifact:
-      files:
-        - imagedefinitions.json  
+  # secondary-artifacts:
+  #   DefinitionArtifact:
+  #     files:
+  #       - appspec.yaml
+  #       - taskdef.json
+  #   ImageArtifact:
+  #     files:
+  #       - imagedefinitions.json  
