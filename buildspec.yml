@@ -47,5 +47,7 @@ phases:
       - cat imagedefinitions.json   
 artifacts:
     files: 
-      - imagedefinitions.json
-      - trivy.json
+      - 'image*.json'
+      - 'appspec.yaml'
+      - 'taskdef.json'
+      - 'trivy.json'
