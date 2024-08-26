@@ -16,4 +16,4 @@ Resources:
         TaskDefinition: "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:18"
         LoadBalancerInfo:
           ContainerName: "demo-app"
-          ContainerPort: 80
+          ContainerPort: 8080
