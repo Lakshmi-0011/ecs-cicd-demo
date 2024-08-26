@@ -1,19 +1,9 @@
-# version: 0.0
-# Resources:
-#  - TargetService:
-#      Type: AWS::ECS::Service
-#      Properties:
-#        TaskDefinition: <TASK_DEFINITION>
-#        LoadBalancerInfo:
-#          ContainerName: demo-app
-#          ContainerPort: 8080
-
 version: 0.0
 Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:18"
+        TaskDefinition: "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:19"
         LoadBalancerInfo:
           ContainerName: "demo-app"
           ContainerPort: 8080

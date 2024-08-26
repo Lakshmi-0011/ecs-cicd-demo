@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:18",
+    "taskDefinitionArn": "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:19",
     "containerDefinitions": [
         {
             "name": "demo-app",
-            "image": "<IMAGE_NAME>",
+            "image": "ImageUri",
             "cpu": 0,
             "portMappings": [
                 {
@@ -38,7 +38,7 @@
     "family": "demo-tf",
     "executionRoleArn": "arn:aws:iam::891377353125:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 18,
+    "revision": 19,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -84,7 +84,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-08-26T08:11:35.416Z",
-    "registeredBy": "arn:aws:sts::891377353125:assumed-role/AWSCodePipelineServiceRole-ap-south-1-ecs-demo-pipeline/1724659895135",
+    "registeredAt": "2024-08-26T11:29:38.849Z",
+    "registeredBy": "arn:aws:iam::891377353125:user/lakshmi",
     "tags": []
 }
