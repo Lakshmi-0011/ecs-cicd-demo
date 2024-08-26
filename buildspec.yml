@@ -49,6 +49,6 @@ phases:
 artifacts:
     files: 
       - 'image*.json'
-      - 'appspec.yaml'
+      - 'appspec.yml'
       - 'taskdef.json'
       - 'trivy.json'
