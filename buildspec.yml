@@ -21,6 +21,7 @@ phases:
       - export SONAR_SCANNER_HOME=/opt/sonar-scanner-$SONAR_SCANNER_VERSION-linux
       - echo Start sonar scanning
       - sonar-scanner -Dsonar.projectKey=codepipeline-project-key -Dsonar.sources=. -Dsonar.host.url=$sonar_url -Dsonar.token=$sonar_token
+      - echo $DOCKER_LOGIN_TOKEN | docker login --username assignment001 --password-stdin
       - echo Logging in to Amazon ECR.......
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REPOSITORY_URL
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_NUMBER)
