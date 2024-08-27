@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "blue-green",
-            "image": "$REPOSITORY_URL:$IMAGE_TAG",
+            "image": "REPOSITORY_URL:IMAGE_TAG",
             "essential": true,
             "portMappings": [
                 {
