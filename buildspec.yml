@@ -48,10 +48,10 @@ phases:
       - cat imagedefinitions.json   
 artifacts:
   files: 
-    - 'image*.json'
-    - 'appspec.yml'
-    - 'trivy.json'
-    - 'taskdef.json'
+    - imagedefinitions.json
+    - appspec.yml
+    - trivy.json
+    - taskdef.json
   secondary-artifacts:
     ImageArtifact:
       files:
