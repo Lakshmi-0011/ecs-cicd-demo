@@ -3,11 +3,11 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:ap-south-1:891377353125:task-definition/demo-tf:19"
+        TaskDefinition: "<TASK_DEFINITION>"
         LoadBalancerInfo:
           ContainerName: "demo-app"
           ContainerPort: 8080
-        NetworkConfiguration:
-          AwsvpcConfiguration:
-            Subnets: ["subnet-0f92431f928795727", "subnet-01864543596cf67d1", "subnet-025d36102e660fbec"]
-            SecurityGroups: ["sg-0392c265cb342861f"]
+        # NetworkConfiguration:
+        #   AwsvpcConfiguration:
+        #     Subnets: ["subnet-0f92431f928795727", "subnet-01864543596cf67d1", "subnet-025d36102e660fbec"]
+        #     SecurityGroups: ["sg-0392c265cb342861f"]

@@ -1,6 +1,15 @@
 version: 0.2
 run-as: root
 
+# env:
+#   variables:
+#     AWS_ACCOUNT_ID: "528302462811"
+#     AWS_DEFAULT_REGION: "ap-south-1"
+#     IMAGE_REPO_NAME: "flask-repo"
+#     CONTAINER_NAME: "flask"
+#     IMAGE_TAG: "latest"
+#     REPOSITORY_URI: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+
 phases:
   install:
     commands:
@@ -44,15 +53,16 @@ phases:
       - echo "Trivy scan complete"
       - echo ECS Configuration....
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URL:$IMAGE_TAG > imagedefinitions.json
-      - cat imagedefinitions.json   
+      - ImageURI="$REPOSITORY_URL:$IMAGE_TAG"
+      - printf '{"ImageURI":"image_URI"}' > imageDetail.json
+      - cat imageDetail.json  
 artifacts:
   files: 
-    - imagedefinitions.json
+    - imageDetail.json
     - appspec.yml
     - trivy.json
     - taskdef.json
-  secondary-artifacts:
-    ImageArtifact:
-      files:
-        - imagedefinitions.json  
+  # secondary-artifacts:
+  #   ImageArtifact:
+  #     files:
+  #       - imageDetail.json 
