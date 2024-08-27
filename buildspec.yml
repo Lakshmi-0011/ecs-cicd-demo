@@ -52,6 +52,10 @@ phases:
       - echo "Starting Trivy scan..."
       - trivy image --no-progress --severity CRITICAL,HIGH $REPOSITORY_URL:$IMAGE_TAG > trivy.json
       - echo "Trivy scan complete"
+      - sed -i 's@REPOSITORY_URL@'$REPOSITORY_URL'@g' taskdef.json
+      - sed -i 's@IMAGE_TAG@'IMAGE_TAG'@g' taskdef.json
+      - sed -i 's@AWS_ACCOUNT_ID'$AWS_ACCOUNT_ID'@g' taskdef.json
+      - sed -i 's@AWS_DEFAULT_REGION'$AWS_DEFAULT_REGION'@g' taskdef.json
       - echo ECS Configuration....
       - echo Writing image definitions file...
       - printf '[{"name":"%s","imageUri":"%s"}]' $CONTAINER_NAME $REPOSITORY_URL:$IMAGE_TAG > imagedefinitions.json
