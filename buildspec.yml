@@ -53,8 +53,8 @@ phases:
       - echo "Trivy scan complete"
       - echo ECS Configuration....
       - echo Writing image definitions file...
-      - ImageURI="$REPOSITORY_URL:$IMAGE_TAG"
-      - printf '{"ImageURI":"image_URI"}' > imageDetail.json
+      - IMAGE_URI="$REPOSITORY_URL:$IMAGE_TAG"
+      - printf '{"ImageURI":"%s"}' "${IMAGE_URI}" > imageDetail.json
       - cat imageDetail.json  
 artifacts:
   files: 
