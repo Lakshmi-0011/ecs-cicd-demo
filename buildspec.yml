@@ -51,7 +51,7 @@ artifacts:
     - 'image*.json'
     - 'appspec.yml'
     - 'taskdef.json'
-  secondary-artifacts:
+  secondary_artifacts:
     DefinitionArtifact:
       files:
         - appspec.yaml
