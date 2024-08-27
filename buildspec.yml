@@ -59,9 +59,9 @@ phases:
 artifacts:
   files: 
     - imageDetail.json
-    # - appspec.yml
+    - appspec.yml
     - trivy.json
-    # - taskdef.json
+    - taskdef.json
   # secondary-artifacts:
   #   ImageArtifact:
   #     files:
