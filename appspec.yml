@@ -4,6 +4,7 @@ Resources:
       Type: AWS::ECS::Service
       Properties:
         TaskDefinition: "demo-tf"
+        # TaskDefinition: taskdef.json
         LoadBalancerInfo:
           ContainerName: "demo-app"
           ContainerPort: 8080
