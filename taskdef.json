@@ -1,5 +1,5 @@
 {
-    "executionRoleArn": "arn:aws:iam::account_ID:role/ecsTaskExecutionRole",
+    "executionRoleArn": "arn:aws:iam::891377353125:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "name": "demo-app",
@@ -31,5 +31,5 @@
     "networkMode": "awsvpc",
     "cpu": "256",
     "memory": "512",
-    "family": "ecs-demo"
+    "family": "demo-tf"
 }
