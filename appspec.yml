@@ -3,10 +3,10 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "demo-tf"
+        TaskDefinition: "blue-green-taskdef"
         # TaskDefinition: taskdef.json
         LoadBalancerInfo:
-          ContainerName: "demo-app"
+          ContainerName: "blue-green"
           ContainerPort: 8080
         # NetworkConfiguration:
         #   AwsvpcConfiguration:

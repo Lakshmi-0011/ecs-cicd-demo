@@ -2,7 +2,7 @@
     "executionRoleArn": "arn:aws:iam::891377353125:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
-            "name": "demo-app",
+            "name": "blue-green",
             "image": "<IMAGE1_NAME>",
             "essential": true,
             "portMappings": [
@@ -31,5 +31,5 @@
     "networkMode": "awsvpc",
     "cpu": "256",
     "memory": "512",
-    "family": "demo-tf"
+    "family": "blue-green-taskdef"
 }
