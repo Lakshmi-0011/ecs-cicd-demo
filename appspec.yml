@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "blue-green-taskdef"
+        TaskDefinition: "<TASK_DEFINITION>"
         # TaskDefinition: taskdef.json
         LoadBalancerInfo:
           ContainerName: "blue-green"
