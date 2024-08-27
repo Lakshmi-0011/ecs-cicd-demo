@@ -50,12 +50,9 @@ artifacts:
   files: 
     - 'image*.json'
     - 'appspec.yml'
+    - 'trivy.json'
     - 'taskdef.json'
-  secondary_artifacts:
-    DefinitionArtifact:
-      files:
-        - appspec.yaml
-        - taskdef.json
+  secondary-artifacts:
     ImageArtifact:
       files:
         - imagedefinitions.json  
