@@ -53,12 +53,14 @@ phases:
       - echo "Trivy scan complete"
       - echo ECS Configuration....
       - echo Writing image definitions file...
-      - IMAGE_URI="$REPOSITORY_URL:$IMAGE_TAG"
-      - printf '{"ImageURI":"%s"}' "${IMAGE_URI}" > imageDetail.json
-      - cat imageDetail.json  
+      - container_name="demo-app"
+      - image_URI="$REPOSITORY_URL:$IMAGE_TAG"
+      - printf '[{"name":"container_name","imageUri":"image_URI"}]' > imagedefinitions.json
+      # - printf '{"ImageURI":"%s"}' "${IMAGE_URI}" > imageDetail.json
+      - cat imagedefinitions.json 
 artifacts:
   files: 
-    - imageDetail.json
+    - imagedefinitions.json
     - appspec.yml
     - trivy.json
     - taskdef.json
